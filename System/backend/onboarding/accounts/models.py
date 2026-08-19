@@ -66,11 +66,11 @@ class UserManager(BaseUserManager) :
 
 class User(AbstractBaseUser, PermissionsMixin) :
     """사용자 - 사원번호 기반 로그인"""
-    dept = models.ForeignKey(Dept, on_delete=models.PROTECT, related_name="users")
-    rank = models.ForeignKey(Rank, on_delete=models.PROTECT, related_name="users")
-    role = models.ForeignKey(Role, on_delete=models.PROTECT, related_name="users")
+    dept = models.ForeignKey(Dept, on_delete=models.PROTECT, related_name="users", verbose_name="부서 아이디")
+    rank = models.ForeignKey(Rank, on_delete=models.PROTECT, related_name="users", verbose_name="직급 아이디")
+    role = models.ForeignKey(Role, on_delete=models.PROTECT, related_name="users", verbose_name="직군 아이디")
 
-    onboarding_track = models.ForeignKey("onboarding.OnboardingTrack", on_delete=models.SET_NULL, null=True, blank=True, related_name="users")
+    onboarding_track = models.ForeignKey("onboarding.OnboardingTrack", on_delete=models.SET_NULL, null=True, blank=True, related_name="users", verbose_name="온보딩 트랙 아이디")
 
     name = models.CharField(max_length=50, verbose_name="이름")
     employee_num = models.CharField(max_length=50, unique=True, verbose_name="사원번호")
